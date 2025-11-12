@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elisee | Web Dev • Amapiano • Hacker • King David Academy</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Bebas+Neue&family=Orbitron&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* ===== GOLD THEME & RESET ===== */
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#0a0a0a;
+      color:#fff;
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+    :root{
+      --gold: #ffd700;
+      --dark-gold: #b8860b;
+      --bg: #0a0a0a;
+      --card: #1a1a1a;
+      --pink: #ff69b4;
+      --green: #0f0;
+      --blue: #1e40af;
+      --dark-blue: #0f172a;
+      --dark-green: #0f2a1e;
+      --light-cyan: #e0f2fe;
+    }
+    a{color:inherit;text-decoration:none;}
+    img{max-width:100%;border-radius:12px;}
+
+    /* ===== NAVBAR ===== */
+    .navbar{
+      position:fixed;top:0;width:100%;z-index:1000;
+      background:rgba(10,10,10,.95);backdrop-filter:blur(12px);
+      padding:1.2rem 5%;display:flex;justify-content:space-between;align-items:center;
+      border-bottom:2px solid var(--gold);
+    }
+    .logo{
+      font-family:'Bebas Neue',cursive;font-size:2rem;color:var(--gold);
+      text-shadow:0 0 10px rgba(255,215,0,.5);
+    }
+    .nav-links{
+      display:flex;gap:2rem;list-style:none;
+    }
+    .nav-links a{
+      color:#ccc;font-weight:500;transition:.3s;position:relative;
+    }
+    .nav-links a::after{
+      content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;
+      background:var(--gold);transition:.3s;
+    }
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+    .nav-links a:hover,.nav-links a.active{color:var(--gold);}
+    .hamburger{display:none;font-size:1.8rem;color:var(--gold);cursor:pointer;}
+
+    /* ===== HERO ===== */
+    .hero{
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      padding:0 5%;gap:3rem;margin-top:70px;flex-wrap:wrap;
+      background:linear-gradient(135deg,#0a0a0a 0%,#1a0a0a 100%);
+    }
+    .hero-content{text-align:center;max-width:600px;}
+    .hero h1{
+      font-size:4rem;font-family:'Bebas Neue',cursive;color:var(--gold);
+      text-shadow:0 0 20px rgba(255,215,0,.4);margin-bottom:.5rem;
+    }
+    .hero h1 span{color:#fff;}
+    .tagline{
+      font-size:1.5rem;color:var(--gold);margin:1rem 0;
+      font-weight:600;
+    }
+    .live-info{
+      background:var(--card);padding:1rem 1.5rem;border-radius:50px;
+      display:inline-block;margin:1rem 0;border:1px solid var(--gold);
+      font-weight:500;
+    }
+    .socials{
+      display:flex;gap:1.2rem;justify-content:center;font-size:1.8rem;margin:1.5rem 0;
+    }
+    .socials a{
+      color:#ccc;transition:.4s;padding:.5rem;border-radius:50%;
+      background:var(--card);width:50px;height:50px;display:flex;
+      align-items:center;justify-content:center;border:1px solid #333;
+    }
+    .socials a:hover{
+      background:var(--gold);color:#000;transform:scale(1.2) rotate(10deg);
+      box-shadow:0 0 15px rgba(255,215,0,.6);
+    }
+    .btn{
+      background:var(--gold);color:#000;padding:14px 32px;border-radius:50px;
+      font-weight:700;font-size:1.1rem;margin-top:1rem;display:inline-block;
+      transition:.3s;box-shadow:0 5px 15px rgba(255,215,0,.3);
+    }
+    .btn:hover{
+      background:#ffed4e;transform:translateY(-3px);
+      box-shadow:0 8px 20px rgba(255,215,0,.5);
+    }
+    .hero-img img{
+      width:280px;border:4px solid var(--gold);box-shadow:0 0 30px rgba(255,215,0,.4);
+      animation:pulse 3s infinite;
+    }
+    @keyframes pulse{
+      0%,100%{box-shadow:0 0 30px rgba(255,215,0,.4);}
+      50%{box-shadow:0 0 50px rgba(255,215,0,.8);}
+    }
+
+    /* ===== SECTIONS ===== */
+    section{padding:6rem 5%;text-align:center;}
+    section h2{
+      font-size:3rem;font-family:'Bebas Neue',cursive;color:var(--gold);
+      margin-bottom:2rem;text-shadow:0 0 10px rgba(255,215,0,.3);
+    }
+
+    /* About */
+    .about p{
+      max-width:800px;margin:0 auto 1.5rem;font-size:1.1rem;
+      background:var(--card);padding:1.5rem;border-radius:16px;
+      border-left:4px solid var(--gold);
+    }
+
+    /* Typing Test */
+    .typing-test{
+      max-width:800px;margin:2rem auto;background:var(--card);
+      padding:2rem;border-radius:16px;border:2px solid var(--gold);
+    }
+    #words{display: flex; flex-wrap: wrap; gap: 0.4rem; font-size: 1.3rem; margin: 1.5rem 0;}
+    .word{color:#aaa;}
+    .word.correct{color:#0f0;}
+    .word.incorrect{color:#f55;}
+    .current{outline:2px solid var(--gold);padding:0 4px;border-radius:4px;}
+    #input{font-size:1.3rem;padding:12px;width:100%;background:#000;color:#fff;border:1px solid var(--gold);border-radius:8px;}
+    .stats{display:flex;gap:2rem;justify-content:center;margin-top:1rem;font-weight:600;}
+    .stat span{color:var(--gold);}
+
+    /* Hacking Tool */
+    .hacking-tool{
+      max-width:700px;margin:2rem auto;background:#000;padding:1.5rem;
+      border:2px dashed var(--gold);border-radius:16px;font-family:monospace;
+      color:#0f0;text-align:left;
+    }
+    .terminal-line::before{content:'> ';color:var(--gold);}
+    #hackOutput{white-space:pre-wrap;min-height:120px;}
+
+    /* Music Player */
+    .music-player{
+      max-width:500px;margin:2rem auto;background:var(--card);
+      padding:1.5rem;border-radius:16px;border:2px solid var(--gold);
+      text-align:center;
+    }
+    #playPause{
+      background:var(--gold);color:#000;width:60px;height:60px;
+      border-radius:50%;font-size:1.8rem;display:inline-flex;
+      align-items:center;justify-content:center;cursor:pointer;
+      transition:.3s;box-shadow:0 0 15px rgba(255,215,0,.5);
+    }
+    #playPause:hover{transform:scale(1.1);}
+
+    /* Roast Battle */
+    .roast-section{
+      background:var(--card);padding:2rem;border-radius:16px;
+      max-width:600px;margin:2rem auto;border:2px dashed var(--gold);
+    }
+    #roastBtn{
+      background:var(--dark-gold);color:#fff;padding:12px 24px;
+      border-radius:50px;font-weight:700;cursor:pointer;
+    }
+    #roastOutput{
+      margin-top:1rem;font-style:italic;color:var(--gold);min-height:50px;
+    }
+
+    /* ===== SECRET PAGES ===== */
+    .secret-page{
+      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      z-index:9999;flex-direction:column;justify-content:center;align-items:center;
+      padding:2rem;text-align:center;color:#fff;overflow-y:auto;
+    }
+
+    /* 143: Crush */
+    #secret-143{background:linear-gradient(135deg,#000,#1a001a);}
+    #secret-143 h2{color:var(--pink);font-size:3.5rem;}
+
+    /* 777: Hacker */
+    #secret-777{background:#000;font-family:'Orbitron',monospace;color:var(--green);}
+    #secret-777 h2{font-size:3rem;text-shadow:0 0 10px var(--green);}
+
+    /* 999: Dance */
+    #secret-999{background:linear-gradient(45deg,#1a0a00,#0a1a0a);overflow:hidden;}
+    #secret-999 h2{color:var(--gold);text-shadow:0 0 20px gold;}
+    #secret-999 .dance-gif{width:220px;height:220px;object-fit:cover;border-radius:50%;border:6px solid gold;box-shadow:0 0 40px gold;animation:spin 3s linear infinite;}
+    @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
+    /* 098: Ashley - NORMAL FONT (Inter) + DARK BLUE + DARK GREEN */
+    #secret-098{
+      background:linear-gradient(135deg, var(--dark-blue), var(--dark-green));
+      color:var(--light-cyan);
+      font-family:'Inter', sans-serif;
+      padding:3rem 1rem;
+    }
+    #secret-098 h1{
+      font-size:5.5rem;color:#60a5fa;text-shadow:0 0 25px #38bdf8;
+      animation:float 3s ease-in-out infinite;
+      margin-bottom:2rem;
+      font-weight:700;
+      font-family:'Bebas Neue', cursive;
+    }
+    #secret-098 .story{
+      max-width:900px;font-size:1.4rem;line-height:2.2;
+      background:rgba(15, 23, 42, 0.92);color:var(--light-cyan);
+      padding:3rem;border-radius:28px;
+      border:5px double #60a5fa;
+      box-shadow:0 0 40px rgba(56, 189, 248, 0.7);
+      text-align:left;
+      backdrop-filter:blur(8px);
+      font-weight:500;
+    }
+    #secret-098 .emoji{font-size:2.4rem;margin:0 0.5rem;vertical-align:middle;}
+
+    /* 911: Elvin - FAV SONG + FULLY READABLE */
+    #secret-911{
+      background:linear-gradient(135deg,#0f1b2e,#1a3a5f);
+      color:#bbdefb;
+      font-family:'Poppins',sans-serif;
+    }
+    #secret-911 h1{
+      font-size:5rem;color:#42a5f5;text-shadow:0 0 18px #1e88e5;
+      animation:pulse 2s infinite;
+      margin-bottom:1.5rem;
+    }
+    #secret-911 .story{
+      max-width:900px;font-size:1.35rem;line-height:2.1;
+      background:rgba(30,136,229,0.15);color:#e3f2fd;
+      padding:3rem;border-radius:26px;
+      border:4px solid #42a5f5;
+      box-shadow:0 0 35px rgba(66,165,245,0.6);
+      text-align:left;
+    }
+    #secret-911 .emoji{font-size:2.2rem;margin:0 0.4rem;vertical-align:middle;}
+
+    @keyframes float{
+      0%,100%{transform:translateY(0);}
+      50%{transform:translateY(-22px);}
+    }
+    @keyframes pulse{
+      0%,100%{transform:scale(1);}
+      50%{transform:scale(1.05);}
+    }
+
+    .close-secret{
+      margin-top:2.5rem;padding:16px 40px;border-radius:50px;font-weight:700;
+      cursor:pointer;border:none;font-size:1.2rem;
+      transition:.3s;
+    }
+    #close-143{background:var(--pink);color:#fff;}
+    #close-777{background:var(--green);color:#000;}
+    #close-999{background:gold;color:#000;}
+    #close-098{background:#38bdf8;color:#fff;}
+    #close-911{background:#42a5f5;color:#fff;}
+    .close-secret:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(255,255,255,.3);}
+
+    /* Contact */
+    .contact form{
+      max-width:600px;margin:2rem auto;display:flex;flex-direction:column;gap:1rem;
+    }
+    .contact input,.contact textarea{
+      padding:1rem;border-radius:12px;background:var(--card);
+      border:1px solid var(--gold);color:#fff;font-size:1rem;
+    }
+    .success-msg{color:#00ff9d;font-weight:600;margin-top:1rem;display:none;}
+
+    /* Footer */
+    footer{
+      text-align:center;padding:2.5rem;background:#000;
+      border-top:2px solid var(--gold);font-size:.9rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:768px){
+      .hamburger{display:block;}
+      .nav-links{
+        position:fixed;top:70px;left:-100%;width:100%;background:var(--bg);
+        flex-direction:column;padding:2rem 0;transition:.4s;
+      }
+      .nav-links.active{left:0;}
+      .hero{flex-direction:column;text-align:center;}
+      .hero h1{font-size:3rem;}
+      .hero-img img{width:200px;}
+      #secret-098 h1{font-size:3.8rem;}
+      #secret-911 h1{font-size:3.5rem;}
+      #secret-098 .story,#secret-911 .story{font-size:1.1rem;padding:2rem;max-width:95%;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">ELISEE</div>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#typing">Typing</a></li>
+      <li><a href="#hacking">Hack</a></li>
+      <li><a href="#roast">Roast</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger">Menu</div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>I'm <span>Elisee</span></h1>
+      <p class="tagline">Web Dev • Amapiano Pro • Future Hacker</p>
+      <div class="live-info">
+        <p>King David Academy, Kigali</p>
+        <p id="live-clock">Loading time...</p>
+      </div>
+      <div class="socials">
+        <a href="mailto:cdwelisee@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://wa.me/250783827333"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://instagram.com/_cdw_elisee"><i class="fab fa-instagram"></i></a>
+        <a href="https://tiktok.com/@cdwelisee"><i class="fab fa-tiktok"></i></a>
+      </div>
+      <a href="#contact" class="btn">Hit Me Up</a>
+      <p style="margin-top:1rem;color:#aaa;font-size:0.9rem;">
+        <strong>Secret Codes:</strong> 143 • 777 • 999 • 098 • 911 • 000 (reset)
+      </p>
+    </div>
+    <div class="hero-img">
+      <img src="assets/profile.jpg" alt="Elisee" />
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>King David Academy • Kigali, Rwanda</p>
+    <p>Web dev, Amapiano dancer, ethical hacker, roast king.</p>
+    <p>Crush-coded secrets. Gold vibes only.</p>
+  </section>
+
+  <!-- TYPING TEST -->
+  <section id="typing" class="typing-test">
+    <h2>Typing Test</h2>
+    <div id="timer">60</div>
+    <div id="words"></div>
+    <input type="text" id="input" placeholder="Type here..." autocomplete="off" />
+    <div class="stats">
+      <div class="stat">WPM: <span id="wpm">0</span></div>
+      <div class="stat">Acc: <span id="accuracy">100%</span></div>
+      <div class="stat">Time: <span id="time-left">60</span>s</div>
+    </div>
+    <button class="btn" onclick="restartTyping()">Restart</button>
+  </section>
+
+  <!-- HACKING TOOL -->
+  <section id="hacking" class="hacking-tool">
+    <h2>Hacker Terminal</h2>
+    <div class="terminal-line">Ready. Type 777 to enter vault.</div>
+    <div id="hackOutput"></div>
+    <button class="btn-small" onclick="runHack()">BREACH</button>
+  </section>
+
+  <!-- MUSIC PLAYER -->
+  <section class="music-section">
+    <h2>Amapiano Vibes</h2>
+    <div class="music-player">
+      <audio id="amapiano" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2023/03/15/audio_2d8f5c6e7a.mp3?filename=amapiano-type-beat-148bpm-150083.mp3" type="audio/mp3">
+      </audio>
+      <div style="display:flex;gap:1rem;align-items:center;justify-content:center;">
+        <div id="playPause">Play</div>
+        <span>Type 999 for dance floor</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROAST BATTLE -->
+  <section id="roast" class="roast-section">
+    <h2>Roast Battle</h2>
+    <button id="roastBtn">ROAST ME</button>
+    <p id="roastOutput"></p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <form id="contact-form">
+      <input type="text" placeholder="Name" required />
+      <input type="email" placeholder="Email" required />
+      <textarea placeholder="Message" rows="5" required></textarea>
+      <button type="submit" class="btn">Send</button>
+    </form>
+    <p class="success-msg" id="success-msg">Sent!</p>
+  </section>
+
+  <!-- SECRET PAGES -->
+
+  <!-- 143: Crush -->
+  <div id="secret-143" class="secret-page">
+    <h2>143</h2>
+    <p>You’re the only one I’d share my time with.<br>Every second on that watch = my heart beating for you.</p>
+    <p><em>— Elisee</em></p>
+    <button id="close-143" class="close-secret">Close</button>
+  </div>
+
+  <!-- 777: Hacker -->
+  <div id="secret-777" class="secret-page">
+    <h2>VAULT UNLOCKED</h2>
+    <p>Access Level: GOD MODE</p>
+    <p>Secret Files:<br>• Project "GoldHeart.exe"<br>• Amapiano AI Dancer v0.9<br>• Roast Generator 3000</p>
+    <button id="close-777" class="close-secret">EXIT</button>
+  </div>
+
+  <!-- 999: Dance -->
+  <div id="secret-999" class="secret-page">
+    <h2>AMAPIANO FLOOR</h2>
+    <img src="https://media.giphy.com/media/1wqqlaI1h2yjgO4J2g/giphy.gif" class="dance-gif" alt="Dance">
+    <p>Drop the beat. Let’s move.</p>
+    <audio id="dance-beat" loop autoplay>
+      <source src="https://cdn.pixabay.com/download/audio/2023/03/15/audio_2d8f5c6e7a.mp3?filename=amapiano-type-beat-148bpm-150083.mp3" type="audio/mp3">
+    </audio>
+    <button id="close-999" class="close-secret">Stop Dancing</button>
+  </div>
+
+  <!-- 098: Ashley - NORMAL FONT (Inter) + DARK BLUE + DARK GREEN -->
+  <div id="secret-098" class="secret-page">
+    <h1>Thanks Ash</h1>
+    <div class="story">
+      <p>Ashley, <span class="emoji">you are the spark that lit my entire universe.</span></p>
+      <p>Before you, I was just a kid with dreams too big for my hands. You saw the coder in me when I was still failing IT. You believed in the dancer when I had two left feet. You told me, <em>“Elisee, you’re not average. You’re a legend in the making.”</em></p>
+      <p>Every website I build? That’s your vision in code. Every Amapiano move I nail? That’s your rhythm in my soul. Every time I win a roast battle? That’s your confidence in my voice.</p>
+      <p>You pushed me to King David Academy. You made me chase gold themes and perfect UX. You said, <em>“Don’t just make websites — make art.”</em> And I did.</p>
+      <p>You motivated me to be bold, to be creative, to be <strong>Elisee</strong>. Without you, I’d still be lost in basic HTML. With you, I’m building secret pages, typing tests, hacker vaults, and crush confessions.</p>
+      <p>This entire site? It’s a tribute to you. Every animation, every beat, every hidden code — it all says: <strong>THANK YOU, ASHLEY.</strong></p>
+      <p>I owe you my growth, my glow, my gold. You’re not just my friend — you’re my foundation.</p>
+      <p>From the boy who couldn’t center a div to the legend who builds full websites in one file — that’s your magic.</p>
+      <p>Forever grateful. Forever yours in spirit.</p>
+      <p><strong>— Elisee, the one you built</strong></p>
+    </div>
+    <button id="close-098" class="close-secret">Close & Keep Shining</button>
+  </div>
+
+  <!-- 911: Elvin - FAV SONG + FULLY READABLE -->
+  <div id="secret-911" class="secret-page">
+    <h1>Elvin, I Miss You</h1>
+    <div class="story">
+      <p>Elvin, <span class="emoji">from day one, we were unstoppable. Two idiots with big dreams and bigger laughs.</span></p>
+      <p>We met and clicked like magnets. You were my partner in crime — skipping class to code, dancing in the hallway, roasting teachers behind their backs. We had love, not the romantic kind, but the real kind — the kind where you’d fight the world for each other.</p>
+      <p>We were dumb together: stealing Wi-Fi, making fake IDs, trying to hack the school system (and failing). But we were free. We were brothers.</p>
+      <p>Then one day, you thought I changed. Rumors said I was into bad behavior — skipping prayers, talking back, lending stuff I shouldn’t. You pulled away. And I let you. I was hurt. I didn’t fight for us.</p>
+      <p>But you were wrong. And I was wrong for not proving it. Later, you found out the truth — I was still the same Elisee. The one who’d give you his last byte of data.</p>
+      <p>We reunited. Stronger. Wiser. This term, I bought you a gift — a bracelet. But I took it back because it wasn’t new. I’m sorry.</p>
+      <p>Then your friend’s birthday came. I gave the money I saved for you to her. I got carried away. I lent the bracelet to others. I messed up.</p>
+      <p>Elvin, this is my apology. That bracelet was for <strong>you</strong>. Not for show. Not for others. I should’ve kept it sacred.</p>
+      <p>I miss our stupidity. I miss our love. I miss <strong>us</strong>.</p>
+      <p>Forgive me. Let’s rebuild. Let’s be legends again.</p>
+      <p><strong>— Elisee, your brother forever</strong></p>
+    </div>
+    <audio id="elvin-song" autoplay>
+      <source src="https://grok.com/c/bb3b08af-4f25-4de8-a5a0-5507ec85d3db" type="audio/mp3">
+    </audio>
+    <button id="close-911" class="close-secret">Close & Reconnect</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Elisee • <a href="mailto:cdwelisee@gmail.com">cdwelisee@gmail.com</a> • +250 783 827 333</p>
+  </footer>
+
+  <script>
+    // === GLOBALS ===
+    let typingTimer, wpmInterval, startTime, correctChars = 0, totalChars = 0;
+    const wordsList = "code dance vibe gold heart secret crush hacker king legend rwanda kigali ashley elvin friend love miss".split(' ');
+    const roasts = ["Your code so clean, your crush uses it as a mirror.", "You dance so smooth, the beat asks for lessons.", "King David called — they want their GOAT back."];
+
+    // === NAVBAR ===
+    document.querySelector('.hamburger').onclick = () => {
+      document.querySelector('.nav-links').classList.toggle('active');
+    };
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.onclick = e => { e.preventDefault(); document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'}); };
+    });
+
+    // === CLOCK ===
+    function updateClock() {
+      const now = new Date();
+      const rw = new Date(now.getTime() + 2*60*60*1000);
+      const time = rw.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+      const date = rw.toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'long'});
+      document.getElementById('live-clock').innerHTML = `${date}<br>${time} CAT`;
+    }
+    updateClock(); setInterval(updateClock, 1000);
+
+    // === MUSIC (REAL AMAPIANO) ===
+    const audio = document.getElementById('amapiano');
+    const playPause = document.getElementById('playPause');
+    let isPlaying = false;
+    playPause.onclick = () => {
+      isPlaying ? audio.pause() : audio.play();
+      playPause.innerHTML = isPlaying ? 'Play' : 'Pause';
+      isPlaying = !isPlaying;
+    };
+
+    // === TYPING TEST ===
+    const wordsDiv = document.getElementById('words');
+    const input = document.getElementById('input');
+    let currentWordIndex = 0, wordElements = [];
+
+    function initTyping() {
+      wordsDiv.innerHTML = '';
+      const shuffled = [...wordsList].sort(() => Math.random() - 0.5).slice(0, 40);
+      shuffled.forEach((w, i) => {
+        const s = document.createElement('span'); s.className = 'word'; s.textContent = w + ' ';
+        if (i === 0) s.classList.add('current');
+        wordsDiv.appendChild(s); wordElements.push(s);
+      });
+      input.value = ''; input.focus();
+      correctChars = totalChars = 0; currentWordIndex = 0;
+      document.getElementById('wpm').textContent = '0';
+      document.getElementById('accuracy').textContent = '100%';
+      document.getElementById('time-left').textContent = '60';
+    }
+
+    input.oninput = () => {
+      if (!typingTimer) { startTime = Date.now(); typingTimer = setInterval(updateTimer, 1000); wpmInterval = setInterval(updateWPM, 1000); }
+      const typed = input.value.trim();
+      const current = wordElements[currentWordIndex];
+      if (typed === current.textContent.trim()) {
+        current.classList.remove('current'); current.classList.add('correct');
+        correctChars += typed.length;
+        if (currentWordIndex < wordElements.length - 1) { currentWordIndex++; wordElements[currentWordIndex].classList.add('current'); }
+        input.value = '';
+      } else { totalChars++; }
+    };
+
+    function updateTimer() {
+      const left = Math.max(0, 60 - Math.floor((Date.now() - startTime)/1000));
+      document.getElementById('time-left').textContent = left;
+      if (left === 0) endTyping();
+    }
+    function updateWPM() {
+      const elapsed = (Date.now() - startTime)/60000;
+      const wpm = elapsed > 0 ? Math.round((correctChars/5)/elapsed) : 0;
+      document.getElementById('wpm').textContent = wpm;
+      const acc = totalChars > 0 ? Math.round((correctChars/totalChars)*100) : 100;
+      document.getElementById('accuracy').textContent = acc + '%';
+    }
+    function endTyping() { clearInterval(typingTimer); clearInterval(wpmInterval); input.disabled = true; }
+    function restartTyping() { clearInterval(typingTimer); clearInterval(wpmInterval); typingTimer = null; input.disabled = false; initTyping(); }
+    initTyping();
+
+    // === HACKING ===
+    function runHack() {
+      const out = document.getElementById('hackOutput');
+      out.innerHTML = '';
+      const lines = ["Connecting...", "Bypassing...", "Payload injected.", "Decoding: 143"];
+      let i = 0;
+      const int = setInterval(() => {
+        if (i < lines.length) { const l = document.createElement('div'); l.className = 'terminal-line'; l.textContent = lines[i]; out.appendChild(l); i++; }
+        else clearInterval(int);
+      }, 800);
+    }
+
+    // === ROAST ===
+    document.getElementById('roastBtn').onclick = () => {
+      document.getElementById('roastOutput').textContent = roasts[Math.floor(Math.random() * roasts.length)];
+    };
+
+    // === SECRET PAGES ENGINE ===
+    let buffer = '';
+    const elvinAudio = document.getElementById('elvin-song');
+    document.addEventListener('keydown', e => {
+      if (['INPUT','TEXTAREA'].includes(e.target.tagName)) return;
+      if (e.key === 'Backspace') buffer = buffer.slice(0, -1);
+      else if (e.key.length === 1) buffer += e.key;
+      if (buffer.length > 10) buffer = buffer.slice(-10);
+
+      const code = buffer.trim();
+      if (code === '143') openSecret('143');
+      else if (code === '777') openSecret('777');
+      else if (code === '999') openSecret('999');
+      else if (code === '098') openSecret('098');
+      else if (code === '911') openSecret('911');
+      else if (code === '000') closeAllSecrets();
+    });
+
+    function openSecret(id) {
+      closeAllSecrets();
+      document.getElementById(`secret-${id}`).style.display = 'flex';
+      if (id === '999') document.getElementById('dance-beat').play();
+      if (id === '911') elvinAudio.play().catch(() => {});
+      buffer = '';
+    }
+    function closeAllSecrets() {
+      document.querySelectorAll('.secret-page').forEach(p => p.style.display = 'none');
+      document.getElementById('dance-beat').pause();
+      elvinAudio.pause();
+      elvinAudio.currentTime = 0;
+    }
+
+    ['143','777','999','098','911'].forEach(id => {
+      document.getElementById(`close-${id}`).onclick = () => {
+        document.getElementById(`secret-${id}`).style.display = 'none';
+        if (id === '999') document.getElementById('dance-beat').pause();
+        if (id === '911') { elvinAudio.pause(); elvinAudio.currentTime = 0; }
+      };
+    });
+
+    // === CONTACT ===
+    document.getElementById('contact-form').onsubmit = e => {
+      e.preventDefault();
+      document.getElementById('success-msg').style.display = 'block';
+      e.target.reset();
+      setTimeout(() => document.getElementById('success-msg').style.display = 'none', 4000);
+    };
+  </script>
+</body>
+</html>
